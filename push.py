@@ -94,7 +94,7 @@ class PushNotification:
         url = self.server_chan_url.format(spt)
         
        
-        title = "微信阅读推送..." 
+        title = "微信阅读成功~" 
         if not "自动阅读完成" in content:
             title = "微信阅读失败！！" 
       
