@@ -125,14 +125,17 @@ def push(content, method, is_success = True):
     if method == "telegram":
         return notifier.push_telegram(content, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID)
     if method == "wxpusher":
-        # 如果是成功状态，记录日志并返回，不触发推送
-        if is_success:
-            logger.info("微信阅读成功，跳过 WxPusher 推送。")
-            return True
-        # 如果是失败状态，正常执行推送
         return notifier.push_wxpusher(content, WXPUSHER_SPT)
+    
+    # --- ServerChan 修改区域 ---
     if method == "serverchan":
+        if is_success:
+            # 如果阅读成功，记录日志并直接返回，不执行下面的推送
+            logger.info("微信阅读成功，按设置跳过 ServerChan 推送。")
+            return True
+        # 如果阅读失败（is_success=False），则正常执行推送
         return notifier.push_serverChan(content, SERVERCHAN_SPT, is_success)
+    # --------------------------
 
     logger.warning("无效的通知渠道 '%s'，已跳过推送。支持：pushplus、telegram、wxpusher、serverchan", method)
     return False
