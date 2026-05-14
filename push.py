@@ -120,16 +120,16 @@ def push(content, method, is_success = True):
 
     method = str(method).lower()
 
-if method == "pushplus":
+    if method == "pushplus":
         return notifier.push_pushplus(content, PUSHPLUS_TOKEN, is_success)
     if method == "telegram":
         return notifier.push_telegram(content, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID)
     if method == "wxpusher":
-        # 增加判断：如果是成功状态，则记录日志并直接返回，不触发推送
+        # 如果是成功状态，记录日志并返回，不触发推送
         if is_success:
-            logger.info("微信阅读成功，按设置跳过 WxPusher 推送。")
+            logger.info("微信阅读成功，跳过 WxPusher 推送。")
             return True
-        # 如果是失败状态（is_success=False），则继续执行下面的推送
+        # 如果是失败状态，正常执行推送
         return notifier.push_wxpusher(content, WXPUSHER_SPT)
     if method == "serverchan":
         return notifier.push_serverChan(content, SERVERCHAN_SPT, is_success)
