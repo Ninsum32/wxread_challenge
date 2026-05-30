@@ -13,10 +13,11 @@ from config import data, headers, cookies, READ_NUM, PUSH_METHOD, book, chapter
 
 # 加密盐及其它默认值
 KEY = "3c5c8717f3daf09iop3423zafeqoi"
+COOKIE_DATA = {"rq": "%2Fweb%2Fbook%2Fread"}
+COOKIE_DATA = {"rq": "%2Fweb%2Fbook%2Fread","ql": True}
 READ_URL = "https://weread.qq.com/web/book/read"
 RENEW_URL = "https://weread.qq.com/web/login/renewal"
 FIX_SYNCKEY_URL = "https://weread.qq.com/web/book/chapterInfos"
-COOKIE_DATA_VARIANTS = [{"rq": "%2Fweb%2Fbook%2Fread", "ql": False},{"rq": "%2Fweb%2Fbook%2Fread", "ql": True},{"rq": "%2Fweb%2Fbook%2Fread"},]
 
 
 def encode_data(data):
